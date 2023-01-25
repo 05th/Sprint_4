@@ -1,4 +1,5 @@
-package pageObject;
+package pageobject;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -20,6 +21,7 @@ public class RentPage {
     public RentPage(WebDriver driver) {
         this.driver = driver;
     }
+
     // Methods
     public void inputDateOfRental(String anyDate) {
         driver.findElement(dateOfRentalField).click();
@@ -49,11 +51,12 @@ public class RentPage {
         driver.findElement(orderButtonPushYes).click();
     }
 
-    public boolean checkComplitelyOrder(){
-       return driver.findElement(successOfOrder).isDisplayed();
+    public boolean checkComplitelyOrder() {
+        return driver.findElement(successOfOrder).isDisplayed();
     }
+
     // Combine Methods && Create one of them
-    public void setOrder(String anyDate, String comment){
+    public void setOrder(String anyDate, String comment) {
         inputDateOfRental(anyDate);
         inputRentalTime();
         choiceSamocatColor();

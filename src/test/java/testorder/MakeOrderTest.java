@@ -1,13 +1,15 @@
-package testOrder;
+package testorder;
+
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.chrome.ChromeDriver;
-import pageObject.*;
+import pageobject.*;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.openqa.selenium.WebDriver;
+
 import java.time.Duration;
 import java.util.Arrays;
 
@@ -25,7 +27,7 @@ public class MakeOrderTest {
     private final String comment;
 
     //Constructor
-    public MakeOrderTest(String firstName, String lastName, String address, String metroStation, String phoneNumber, String anyDay, String comment){
+    public MakeOrderTest(String firstName, String lastName, String address, String metroStation, String phoneNumber, String anyDay, String comment) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
@@ -34,14 +36,15 @@ public class MakeOrderTest {
         this.anyDay = anyDay;
         this.comment = comment;
     }
+
     // Parameterized Parameters
     @Parameterized.Parameters
-    public static Iterable<Object[]> data(){
-        return  Arrays.asList(new Object[][] {
+    public static Iterable<Object[]> data() {
+        return Arrays.asList(new Object[][]{
                 {"василий", "иванов", "улица Малая Полянка, 13",
                         "Полянка", "89000050505", "12.08.2022", "важный"},
                 {"андрей", "петров", "улица Сергея Макеева, 9к2", "Улица 1905 года", "+79005555667", "15.12.2022",
-                        "комментарий" }
+                        "комментарий"}
 
         });
     }
@@ -56,9 +59,10 @@ public class MakeOrderTest {
         mainPage.openWebSite();
         mainPage.clickCookieButton();
     }
+
     // Annotation test for Top Order Button
     @Test
-    public void orderSamokatFromTopOrderButton (){
+    public void orderSamokatFromTopOrderButton() {
         // Test Data for Order Page
         MainPage mainPage = new MainPage(driver);
         mainPage.clickTopOrderButton();
@@ -66,12 +70,13 @@ public class MakeOrderTest {
         orderPage.setPersonality(firstName, lastName, address, metroStation, phoneNumber);
         // Test Data for Rent Page
         RentPage rentPage = new RentPage(driver);
-        rentPage.setOrder(anyDay,comment);
+        rentPage.setOrder(anyDay, comment);
         Assert.assertTrue(rentPage.checkComplitelyOrder());
     }
+
     // Annotation test for Lower Order Button
     @Test
-    public void orderSamokatFromLowerOrderButton(){
+    public void orderSamokatFromLowerOrderButton() {
         MainPage mainPage = new MainPage(driver);
         mainPage.clickLowerOrderButton();
         // Test Data for Order Page
@@ -79,7 +84,7 @@ public class MakeOrderTest {
         orderPage.setPersonality(firstName, lastName, address, metroStation, phoneNumber);
         // Test Data for Rent Page
         RentPage rentPage = new RentPage(driver);
-        rentPage.setOrder(anyDay,comment);
+        rentPage.setOrder(anyDay, comment);
         Assert.assertTrue(rentPage.checkComplitelyOrder());
     }
 

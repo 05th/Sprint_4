@@ -1,3 +1,5 @@
+package testquestions;
+
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -7,7 +9,8 @@ import org.junit.runners.Parameterized;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import pageObject.MainPage;
+import pageobject.MainPage;
+import testdata.TestDataQA;
 import java.time.Duration;
 import java.util.Arrays;
 
@@ -20,30 +23,30 @@ public class CompareAnswersText {
     private static String textOfAnswer;
 
     // Constructor
-    public CompareAnswersText(By question, By answer, String textOfAnswer){
+    public CompareAnswersText(By question, By answer, String textOfAnswer) {
         this.question = question;
         this.answer = answer;
         this.textOfAnswer = textOfAnswer;
     }
     // // Parameterized Parameters
     @Parameterized.Parameters
+
     public static Iterable<Object[]> data(){
         return  Arrays.asList(new Object[][] {
-                {MainPage.question1, MainPage.answer1, MainPage.textOfAnswer1},
-                {MainPage.question2, MainPage.answer2, MainPage.textOfAnswer2},
-                {MainPage.question3, MainPage.answer3, MainPage.textOfAnswer3},
-                {MainPage.question4, MainPage.answer4, MainPage.textOfAnswer4},
-                {MainPage.question5, MainPage.answer5, MainPage.textOfAnswer5},
-                {MainPage.question6, MainPage.answer6, MainPage.textOfAnswer6},
-                {MainPage.question7, MainPage.answer7, MainPage.textOfAnswer7},
-                {MainPage.question8, MainPage.answer8, MainPage.textOfAnswer8}
-
+                {TestDataQA.question1, TestDataQA.answer1, TestDataQA.textOfAnswer1},
+                {TestDataQA.question2, TestDataQA.answer2, TestDataQA.textOfAnswer2},
+                {TestDataQA.question3, TestDataQA.answer3, TestDataQA.textOfAnswer3},
+                {TestDataQA.question4, TestDataQA.answer4, TestDataQA.textOfAnswer4},
+                {TestDataQA.question5, TestDataQA.answer5, TestDataQA.textOfAnswer5},
+                {TestDataQA.question6, TestDataQA.answer6, TestDataQA.textOfAnswer6},
+                {TestDataQA.question7, TestDataQA.answer7, TestDataQA.textOfAnswer7},
+                {TestDataQA.question8, TestDataQA.answer8, TestDataQA.textOfAnswer8}
         });
     }
 
     // Annotation Before
     @Before
-    public void setUp(){
+    public void setUp() {
         //driver = new FireFoxDriver();
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
@@ -52,17 +55,19 @@ public class CompareAnswersText {
         mainPage.scrollPageDown();
         mainPage.clickCookieButton();
     }
+
     // Annotation Test
     @Test
-    public void compareTextAnswers(){
+    public void compareTextAnswers() {
         MainPage mainPage = new MainPage(driver);
         mainPage.clickByQuestion(question);
         mainPage.getTextOfAnswer(answer);
         Assert.assertEquals(mainPage.getTextOfAnswer(answer), textOfAnswer);
     }
+
     // Annotation After
     @After
-    public void tearDown(){
+    public void tearDown() {
         driver.quit();
     }
 }

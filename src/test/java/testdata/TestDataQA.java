@@ -1,18 +1,9 @@
-package pageObject;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+package testdata;
 
-// Class of Main Page
-public class MainPage {
-    private WebDriver driver;
-    // Maine Page Locators
-    private final String url = "https://qa-scooter.praktikum-services.ru/";
-    public static By topOrderButton = By.xpath(".//button[@class='Button_Button__ra12g']");
-    public static By lowerOrderButton = By.xpath(".//button[contains(@class, 'Button_Middle__1CSJM')]");
-    private final By headerOfQuestions = By.xpath(".//div[text()='Вопросы о важном']");
-    private final By cookieButton = By.id("rcc-confirm-button");
+import org.openqa.selenium.By;
+
+// Class of Test Data for Questions and Answers
+public class TestDataQA {
 
     // Questions && Answers Locators
     public static By question1 = By.id("accordion__heading-0");
@@ -41,39 +32,4 @@ public class MainPage {
     public static final String textOfAnswer6 = "Самокат приезжает к вам с полной зарядкой. Этого хватает на восемь суток — даже если будете кататься без передышек и во сне. Зарядка не понадобится.";
     public static final String textOfAnswer7 = "Да, пока самокат не привезли. Штрафа не будет, объяснительной записки тоже не попросим. Все же свои.";
     public static final String textOfAnswer8 = "Да, обязательно. Всем самокатов! И Москве, и Московской области.";
-
-    // Constructor
-    public MainPage(WebDriver driver){
-        this.driver = driver;
-    }
-    // Methods
-    public void openWebSite(){
-        driver.get(url);
-    }
-
-    public void clickTopOrderButton(){
-        driver.findElement(topOrderButton).click();
-    }
-
-    public void clickLowerOrderButton(){
-        driver.findElement(lowerOrderButton).click();
-    }
-
-    public void scrollPageDown(){
-        WebElement element = driver.findElement(headerOfQuestions);
-        ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();", element);
-    }
-
-    public void clickCookieButton(){
-        driver.findElement(cookieButton).click();
-    }
-
-    public void clickByQuestion(By question){
-        driver.findElement(question).click();
-    }
-
-    public String  getTextOfAnswer(By answer){
-       return driver.findElement(answer).getText();
-    }
-
 }
